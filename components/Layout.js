@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 
 const Layout = ({ title, children, auth }) => {
   const { user = {} } = auth || {};
@@ -7,19 +8,27 @@ const Layout = ({ title, children, auth }) => {
     <div className="root">
       <nav className="navbar">
         <span>
-          Welcome, <strong>Guest</strong>
+          Welcome, <strong>{user.name || "Guest"}</strong>
         </span>
         <div>
           <Link href="/">
             <a>Home</a>
           </Link>
-          <Link href="/profile">
-            <a>Profile</a>
-          </Link>
-          <button>Logout</button>
-          <Link href="/login">
-            <a>Login</a>
-          </Link>
+
+          {user.email ? (
+            <React.Fragment>
+              <Link href="/profile">
+                <a>Profile</a>
+              </Link>
+              <button>Logout</button>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Link href="/login">
+                <a>Login</a>
+              </Link>
+            </React.Fragment>
+          )}
         </div>
       </nav>
       <h1>{title}</h1>
