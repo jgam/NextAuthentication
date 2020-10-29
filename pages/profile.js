@@ -1,4 +1,6 @@
 import { getUserProfile } from "../lib/auth";
+import LoginForm from "../components/LoginForm";
+import React from "react";
 
 export default class Profile extends React.Component {
   state = {
@@ -8,6 +10,9 @@ export default class Profile extends React.Component {
     getUserProfile().then((user) => this.setState({ user }));
   }
   render() {
-    return <pre>{JSON.stringify(this.state.user, null, 2)}</pre>;
+    return;
+    <Layout title="Profile">
+      <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
+    </Layout>;
   }
 }
